@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { from } from 'rxjs';
 import { IProduct } from './product';
+import { ProductService } from './product.service';
 
 @Component({
     selector: 'pm-products',
@@ -9,9 +11,7 @@ import { IProduct } from './product';
 })
 
 export class ProductListComponent implements OnInit{
-    ngOnInit(): void {
-        console.log('In Oninit')
-    }
+
     pageTitle: string = 'Product List';
     imageWidth: number = 50;
     imageMargin: number = 2;
@@ -51,10 +51,21 @@ export class ProductListComponent implements OnInit{
         "imageUrl": "assets/images/garden_cart.png"
       }];
 
-      constructor(){
-          this.filteredProducts = this.products;
-          this.listFilter = 'cart';
-      }
+      
+      constructor(private productService: ProductService) {
+
+    }
+
+    ngOnInit(): void {
+        this.productService.getProducts().subscribe({
+            next: products => {
+                this.products = products
+                this.filteredProducts = this.products;
+            }
+            //error: err => this.errorMessage = err
+        });
+        this.filteredProducts = this.products; 
+    }
 
       performFilter(filterBy: string): IProduct[] {
           filterBy = filterBy.toLocaleLowerCase();
