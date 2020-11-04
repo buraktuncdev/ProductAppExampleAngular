@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { IProduct } from '../product';
 
 @Component({
@@ -15,6 +14,9 @@ export class ProductDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
+
+ 
 
 }

@@ -26,8 +26,6 @@ export class ProductListComponent implements OnInit{
         this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
     }
 
-   
-
     filteredProducts: IProduct[];
 
     products: IProduct[]= [{

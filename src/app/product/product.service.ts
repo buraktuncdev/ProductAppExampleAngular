@@ -12,13 +12,25 @@ export class ProductService {
 
     private productUrl = 'api/products/product.json';
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient){
+       /* this.getProducts().subscribe(
+            success =>{
+
+            },
+            error => {
+
+            }
+            
+        )*/
+    }
 
     getProducts(): Observable<IProduct[]> {
         return this.http.get<IProduct[]>(this.productUrl).pipe(
             tap(data => console.log('All: ' + JSON.stringify(data))),
             catchError(this.handleError)
         );
+        
+       
     }
 
     private handleError(err: HttpErrorResponse) {
